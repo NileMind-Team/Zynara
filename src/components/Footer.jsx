@@ -1,6 +1,6 @@
-import { Mail, MessageCircle } from 'lucide-react';
+import { Mail, MessageCircle, MapPin } from 'lucide-react';
 import bg from '../Assets/footer.jpeg';
-import logo from '../Assets/logodark.png';
+import logo from '../Assets/logo.png';
 
 const Footer = ({ lang = 'ar' }) => {
   const whatsappNumber = '966506751303';
@@ -26,25 +26,14 @@ const Footer = ({ lang = 'ar' }) => {
 
   const handleScroll = (id) => {
     const section = document.getElementById(id);
-    if (section) {
-      const header = document.querySelector('header');
-      const headerHeight = header ? header.offsetHeight : 45;
-      const elementPosition = section.getBoundingClientRect().top + window.scrollY;
-      const offsetPosition = elementPosition - headerHeight;
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth',
-      });
-    }
+    if (section) section.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
   return (
-    <footer
-      className={`relative text-white ${lang === 'ar' ? 'text-right' : 'text-left'}`}
+    <footer 
+      className="relative bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white" 
       dir={lang === 'ar' ? 'rtl' : 'ltr'}
     >
-      {/* Background */}
       <div
         className="absolute inset-0 bg-center bg-cover"
         style={{
@@ -55,98 +44,90 @@ const Footer = ({ lang = 'ar' }) => {
       />
       <div className="absolute inset-0 bg-black/60" aria-hidden="true" />
 
-      {/* Content */}
-      <div className="relative max-w-7xl mx-auto px-6 py-16 md:pt-20 md:pb-10">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-          {/* About with Logo */}
-          <div className="flex flex-col items-start">
-            <img
-              src={logo}
-              alt={lang === 'ar' ? 'لوجو وافي التويجري' : 'Wafi Al-Tuwaijri Logo'}
-              className="w-32 h-auto"
-            />
-            <h3 className="text-3xl text-[#FF7A00] font-bold mt-0 mb-4">
-              {lang === 'ar' ? 'وافي التويجري' : 'Wafi Al-Tuwaijri'}
+      <div className="relative max-w-7xl mx-auto px-6 py-10">
+        <div className="grid md:grid-cols-4 gap-10">
+          {/* Logo Section */}
+          <div className="md:col-span-1">
+            <img src={logo} alt="Logo" className="w-28 mb-4" />
+            <h3 className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-emerald-400 bg-clip-text text-transparent">
+              {lang === 'ar' ? 'أروقة' : 'Aruqah'}
             </h3>
-            <p className="text-base text-gray-200 leading-relaxed max-w-sm">
-              {lang === 'ar'
-                ? 'شركة وافي التويجري للمقاولات — جودة في التنفيذ، التزام في المواعيد، وخبرة طويلة في مجال البناء والتشييد.'
-                : 'Wafi Al-Tuwaijri Contracting — Quality in execution, commitment to deadlines, and long experience in construction.'}
+            <p className="text-gray-400 text-sm mt-4 leading-relaxed">
+              {lang === 'ar' ? 'بناء المستقبل بجودة وإتقان' : 'Building the future with quality and precision'}
             </p>
           </div>
 
           {/* Quick Links */}
-          <div
-            className={`flex ${lang === 'ar' ? 'justify-start' : 'justify-start'} md:justify-center`}
-          >
-            <div>
-              <h4 className="text-2xl font-semibold mb-4">{lang === 'ar' ? 'روابط' : 'Links'}</h4>
-              <ul className="space-y-4">
-                {quickLinks[lang].map((link) => (
-                  <li
-                    key={link.label}
-                    className="cursor-pointer text-gray-200 hover:text-[#FF7A00] transition-colors text-base"
-                    onClick={() => handleScroll(link.href)}
+          <div>
+            <h4 className="text-lg font-semibold mb-4 text-purple-400">
+              {lang === 'ar' ? 'روابط سريعة' : 'Quick Links'}
+            </h4>
+            <ul className="space-y-2">
+              {quickLinks[lang].map((link) => (
+                <li key={link.label}>
+                  <button 
+                    onClick={() => handleScroll(link.href)} 
+                    className="text-gray-400 hover:text-purple-400 transition-colors text-sm"
                   >
-                    • {link.label}
-                  </li>
-                ))}
-              </ul>
+                    {link.label}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Contact Info */}
+          <div>
+            <h4 className="text-lg font-semibold mb-4 text-purple-400">
+              {lang === 'ar' ? 'معلومات الاتصال' : 'Contact Info'}
+            </h4>
+            <div className="space-y-3">
+              <div className="flex items-center gap-3 text-sm text-gray-400">
+                <MapPin className="w-4 h-4 text-purple-400" />
+                <span>{lang === 'ar' ? 'القصيم، السعودية' : 'Al-Qassim, Saudi Arabia'}</span>
+              </div>
+              <div className="flex items-center gap-3 text-sm">
+                <MessageCircle className="w-4 h-4 text-emerald-400" />
+                <a 
+                  href={`https://wa.me/${whatsappNumber}`} 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="text-gray-400 hover:text-emerald-400 transition-colors"
+                >
+                  +966 50 675 1303
+                </a>
+              </div>
+              {emails.map((email) => (
+                <div key={email} className="flex items-center gap-3 text-sm">
+                  <Mail className="w-4 h-4 text-purple-400" />
+                  <a 
+                    href={`mailto:${email}`} 
+                    className="text-gray-400 hover:text-purple-400 transition-colors break-all"
+                  >
+                    {email}
+                  </a>
+                </div>
+              ))}
             </div>
           </div>
 
-          {/* Contact */}
-          <div className="space-y-4">
-            <h4 className="text-2xl font-semibold mb-4">
-              {lang === 'ar' ? 'تواصل معنا' : 'Contact Us'}
+          {/* Tax Info */}
+          <div>
+            <h4 className="text-lg font-semibold mb-4 text-purple-400">
+              {lang === 'ar' ? 'الرقم الضريبي' : 'Tax Info'}
             </h4>
-
-            {/* Emails */}
-            {emails.map((email) => (
-              <div key={email} className="flex items-center gap-3 text-base mb-3">
-                <Mail className="w-6 h-6 text-[#FF7A00]" />
-                <a href={`mailto:${email}`} className="hover:text-[#FF7A00] transition-colors">
-                  {email}
-                </a>
-              </div>
-            ))}
-
-           {/* WhatsApp */}
-            <div className="flex items-center gap-3 text-base mb-3">
-              <MessageCircle className="w-6 h-6 text-[#25D366]" />
-              <a
-                href={`https://wa.me/${whatsappNumber}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-[#25D366] transition-colors"
-              >
-                {lang === "ar" ? (
-                  <>
-                     واتساب :
-                    <span dir="ltr" className="ms-1">+966 50 675 1303</span>
-                  </>
-                ) : (
-                  "WhatsApp: +966 50 675 1303"
-                )}
-              </a>
-            </div>
-
-
-            {/* Tax Number */}
-            <div className="flex items-center gap-3 text-base mt-2">
-              <span className="font-semibold text-[#FF7A00]">
-                {lang === 'ar' ? 'رقم التسجيل الضريبي:' : 'Tax Registration No:'}
-              </span>
-              <span className="text-gray-200">{taxNumber}</span>
+            <div className="p-4 rounded-xl bg-white/5 border border-purple-500/20">
+              <p className="text-xs text-gray-400 mb-1">
+                {lang === 'ar' ? 'رقم التسجيل' : 'Registration No'}
+              </p>
+              <p className="text-sm font-mono text-purple-300">{taxNumber}</p>
             </div>
           </div>
         </div>
 
-        {/* Footer Bottom */}
-        <div className="mt-12 border-t border-white/20 pt-6 text-sm text-gray-300 text-center">
-          {lang === 'ar'
-            ? '© 2025 وافي التويجري للمقاولات. جميع الحقوق محفوظة.'
-            : '© 2025 Wafi Al-Tuwaijri Contracting. All rights reserved.'}
+        {/* Copyright */}
+        <div className="mt-10 pt-6 border-t border-purple-500/20 text-center text-gray-500 text-sm">
+          © 2026 {lang === 'ar' ? 'أروقة' : 'Aruqah'}. {lang === 'ar' ? 'جميع الحقوق محفوظة' : 'All rights reserved.'}
         </div>
       </div>
     </footer>

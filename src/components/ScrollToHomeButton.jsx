@@ -7,38 +7,17 @@ const ScrollToHomeButton = ({ lang }) => {
   useEffect(() => {
     const handleScroll = () => {
       const homeSection = document.getElementById('home');
-      if (homeSection) {
-        const homeBottom = homeSection.getBoundingClientRect().bottom;
-        setVisible(homeBottom < 0);
-      }
+      if (homeSection) setVisible(homeSection.getBoundingClientRect().bottom < 0);
     };
-
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const scrollToHome = () => {
-    const homeSection = document.getElementById('home');
-    if (homeSection) {
-      homeSection.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
   if (!visible) return null;
 
   return (
-    <button
-      onClick={scrollToHome}
-      className={`
-        fixed bottom-6 z-50 
-        ${lang === 'ar' ? 'right-6' : ' left-6'}
-        bg-[#FF7A00] hover:bg-[#e56a00] text-white 
-        shadow-xl rounded-full p-3 transition-all duration-300
-        flex items-center justify-center
-      `}
-      title={lang === 'ar' ? 'الرجوع للرئيسية' : 'Back to Home'}
-    >
-      <ArrowUp size={24} />
+    <button onClick={() => document.getElementById('home')?.scrollIntoView({ behavior: 'smooth' })} className={`fixed bottom-6 z-50 ${lang === 'ar' ? 'right-6' : 'left-6'} w-12 h-12 rounded-full bg-gradient-to-r from-purple-600 to-emerald-600 text-white shadow-xl hover:shadow-purple-500/50 transition-all duration-300 flex items-center justify-center hover:-translate-y-1`}>
+      <ArrowUp size={20} />
     </button>
   );
 };

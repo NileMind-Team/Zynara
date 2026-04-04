@@ -1,17 +1,17 @@
 import { useEffect, useState } from 'react';
 import { Menu, X, Sun, Moon, Globe } from 'lucide-react';
 import logoLight from '../Assets/logo.png';
-import logoDark from '../Assets/logodark.png';
+import logoDark from '../Assets/logo.png';
 
-const Navbar = ({ lang, setLang }) => {
-  const [darkMode, setDarkMode] = useState(() => localStorage.getItem('darkMode') === 'true');
+const Navbar = ({ lang, setLang, darkMode, setDarkMode }) => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [isAnimating, setIsAnimating] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    document.documentElement.lang = lang;
-    document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
-  }, [lang]);
+    const handleScroll = () => setScrolled(window.scrollY > 50);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   useEffect(() => {
     if (darkMode) document.documentElement.classList.add('dark');
@@ -19,41 +19,14 @@ const Navbar = ({ lang, setLang }) => {
     localStorage.setItem('darkMode', darkMode);
   }, [darkMode]);
 
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth >= 768 && menuOpen) {
-        setMenuOpen(false);
-        setIsAnimating(false);
-      }
-    };
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, [menuOpen]);
-
   const toggleLang = () => setLang(lang === 'en' ? 'ar' : 'en');
-  const toggleMenu = () => {
-    if (menuOpen) {
-      setIsAnimating(true);
-      setTimeout(() => {
-        setMenuOpen(false);
-        setIsAnimating(false);
-      }, 400);
-    } else setMenuOpen(true);
-  };
+  const toggleMenu = () => setMenuOpen(!menuOpen);
 
   const handleScroll = (id) => {
     const section = document.getElementById(id);
     if (section) {
-      const headerOffset = 45;
-      const elementPosition = section.getBoundingClientRect().top + window.scrollY;
-      const offsetPosition = elementPosition - headerOffset;
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth',
-      });
-
-      if (menuOpen) toggleMenu();
+      section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      setMenuOpen(false);
     }
   };
 
@@ -75,118 +48,53 @@ const Navbar = ({ lang, setLang }) => {
   };
 
   return (
-    <header className="bg-white dark:bg-gray-900 text-gray-800 dark:text-white fixed w-full top-0 left-0 z-50 shadow-[0_4px_12px_rgba(0,86,179,0.15)] transition-colors duration-300">
-      <div className="container mx-auto px-3 py-1 flex items-center justify-between h-14 md:h-16">
-        {/* Logo */}
-        <div className={`flex items-center ${lang === 'ar' ? 'justify-end' : 'justify-start'}`}>
-          <img
-            src={darkMode ? logoDark : logoLight}
-            alt="Logo"
-            className="w-28 object-contain cursor-pointer hover:scale-105 transition-transform duration-300"
-            onClick={() => handleScroll('home')}
-          />
+    <header className={`fixed w-full top-0 left-0 z-50 transition-all duration-500 ${scrolled ? 'bg-white dark:bg-slate-900 shadow-lg' : 'bg-white dark:bg-slate-900'}`}>
+      <div className="container mx-auto px-4 py-1 flex items-center justify-between h-13 md:h-14">
+        <div className="cursor-pointer" onClick={() => handleScroll('home')}>
+          <img src={darkMode ? logoDark : logoLight} alt="Logo" className="w-10 h-14 object-contain" />
         </div>
 
-        {/* Desktop Links */}
-        <nav className="hidden md:flex space-x-8 rtl:space-x-reverse text-base font-medium">
-          {navLinks[lang].map((link, index) => (
-            <button
-              key={index}
-              onClick={() => handleScroll(link.id)}
-              className="text-[#0056B3] dark:text-white hover:text-[#FF7A00] transition-all duration-300 relative group py-1"
-            >
+        <nav className="hidden md:flex items-center gap-6">
+          {navLinks[lang].map((link) => (
+            <button key={link.id} onClick={() => handleScroll(link.id)} className="text-gray-700 dark:text-gray-200 hover:text-purple-600 dark:hover:text-purple-400 font-medium transition-colors relative group text-sm">
               {link.label}
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#FF7A00] transition-all duration-300 group-hover:w-full"></span>
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-purple-500 to-emerald-500 transition-all duration-300 group-hover:w-full"></span>
             </button>
           ))}
         </nav>
 
-        {/* Desktop Actions */}
-        <div className="hidden md:flex items-center gap-4">
-          <button
-            onClick={() => setDarkMode(!darkMode)}
-            className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition duration-200"
-          >
-            {darkMode ? (
-              <Sun size={20} className="text-[#FF7A00]" />
-            ) : (
-              <Moon size={20} className="text-[#FF7A00]" />
-            )}
+        <div className="hidden md:flex items-center gap-3">
+          <button onClick={() => setDarkMode(!darkMode)} className="p-1.5 rounded-full hover:bg-purple-100 dark:hover:bg-purple-900/50 transition">
+            {darkMode ? <Sun size={18} className="text-amber-500" /> : <Moon size={18} className="text-purple-600" />}
           </button>
-
-          <button
-            onClick={toggleLang}
-            className="bg-[#FF7A00] text-white px-4 py-2 rounded-md text-base hover:bg-[#e56a00] transition duration-200 font-medium flex items-center gap-2"
-          >
-            <Globe size={18} />
-            {lang === 'en' ? 'AR' : 'EN'}
+          <button onClick={toggleLang} className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gradient-to-r from-purple-600 to-emerald-600 text-white text-xs font-medium hover:shadow-lg transition">
+            <Globe size={14} /> {lang === 'en' ? 'AR' : 'EN'}
           </button>
         </div>
 
-        {/* Mobile Menu Button */}
-        <button className="md:hidden text-gray-800 dark:text-white" onClick={toggleMenu}>
-          {menuOpen ? <X size={24} /> : <Menu size={24} />}
+        <button className="md:hidden text-gray-700 dark:text-white" onClick={toggleMenu}>
+          {menuOpen ? <X size={22} /> : <Menu size={22} />}
         </button>
       </div>
 
       {/* Mobile Menu */}
-      {(menuOpen || isAnimating) && (
-        <>
-          <div
-            className={`fixed inset-0 bg-black/40 backdrop-blur-sm z-40 transition-opacity duration-500 md:hidden ${
-              menuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
-            }`}
-            style={{ top: '3.5rem' }}
-            onClick={toggleMenu}
-          />
-
-          <div
-            className={`fixed top-14 bottom-0 bg-white dark:bg-gray-900 z-50 shadow-2xl p-6 flex flex-col transition-all duration-500 transform md:hidden ${
-              lang === 'ar'
-                ? `right-0 w-[65%] ${menuOpen ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'}`
-                : `left-0 w-[65%] ${menuOpen ? 'translate-x-0 opacity-100' : '-translate-x-full opacity-0'}`
-            }`}
-          >
-            <div className="flex flex-col space-y-4 w-full mt-6">
-              {navLinks[lang].map((link, index) => (
-                <button
-                  key={index}
-                  onClick={() => handleScroll(link.id)}
-                  style={{ transitionDelay: `${index * 80}ms` }}
-                  className="text-[#0056B3] dark:text-white hover:text-[#FF7A00] transition-all duration-500 font-medium text-lg py-2 px-3 relative group text-left rtl:text-right"
-                >
-                  {link.label}
-                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#FF7A00] transition-all duration-500 group-hover:w-full rtl:left-auto rtl:right-0"></span>
-                </button>
-              ))}
-            </div>
-
-            {/* Responsive Buttons Section */}
-            <div className="mt-8 w-full flex flex-col sm:flex-row justify-between items-stretch sm:items-center gap-4 px-2">
-              <button
-                onClick={() => setDarkMode(!darkMode)}
-                className="flex items-center justify-center gap-2 p-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition duration-300 flex-1"
-              >
-                {darkMode ? (
-                  <Sun size={20} className="text-[#FF7A00]" />
-                ) : (
-                  <Moon size={20} className="text-[#FF7A00]" />
-                )}
-                <span className="text-base font-medium text-gray-700 dark:text-gray-300">
-                  {darkMode ? (lang === 'en' ? 'Light' : 'فاتح') : lang === 'en' ? 'Dark' : 'داكن'}
-                </span>
-              </button>
-
-              <button
-                onClick={toggleLang}
-                className="flex items-center justify-center gap-2 bg-[#FF7A00] text-white px-4 py-3 rounded-lg hover:bg-[#e56a00] transition duration-300 font-medium text-base flex-1"
-              >
-                <Globe size={18} />
-                {lang === 'en' ? 'AR' : 'EN'}
-              </button>
-            </div>
+      {menuOpen && (
+        <div className="md:hidden fixed inset-0 top-12 bg-white dark:bg-slate-900 z-40 p-5 flex flex-col">
+          {navLinks[lang].map((link) => (
+            <button key={link.id} onClick={() => handleScroll(link.id)} className="py-3 text-gray-700 dark:text-gray-200 hover:text-purple-600 text-base font-medium border-b border-gray-100 dark:border-slate-800">
+              {link.label}
+            </button>
+          ))}
+          <div className="flex gap-3 mt-5 pt-5 border-t border-gray-100 dark:border-slate-800">
+            <button onClick={() => setDarkMode(!darkMode)} className="flex-1 py-2 rounded-xl bg-gray-100 dark:bg-slate-800 flex items-center justify-center gap-2 text-sm">
+              {darkMode ? <Sun size={16} /> : <Moon size={16} />}
+              <span>{darkMode ? (lang === 'en' ? 'Light' : 'فاتح') : (lang === 'en' ? 'Dark' : 'داكن')}</span>
+            </button>
+            <button onClick={toggleLang} className="flex-1 py-2 rounded-xl bg-gradient-to-r from-purple-600 to-emerald-600 text-white flex items-center justify-center gap-2 text-sm">
+              <Globe size={16} /> {lang === 'en' ? 'AR' : 'EN'}
+            </button>
           </div>
-        </>
+        </div>
       )}
     </header>
   );

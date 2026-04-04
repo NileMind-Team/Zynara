@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { Mail, MapPin, Send, MessageCircle, Sparkles } from 'lucide-react';
+import { Mail, MapPin, Send, MessageCircle, Sparkles, Instagram } from 'lucide-react';
 import Swal from 'sweetalert2';
 
 const Contact = ({ lang }) => {
@@ -8,12 +8,15 @@ const Contact = ({ lang }) => {
   const [visible, setVisible] = useState(false);
   const sectionRef = useRef(null);
 
-  const whatsappNumber = '966506751303';
-  const emails = ['genralpedwi@gmail.com', 'sdwr2000@gmail.com'];
-  const taxNumber = '312864606400003';
+  const whatsappNumber = '201062485133';
+  const emails = ['support@Aruqah.com'];
+  const instagramHandle = '@Aruqah_official';
+  const taxNumber = '312864606484703';
 
   useEffect(() => {
-    const observer = new IntersectionObserver(([entry]) => setVisible(entry.isIntersecting), { threshold: 0.1 });
+    const observer = new IntersectionObserver(([entry]) => setVisible(entry.isIntersecting), {
+      threshold: 0.1,
+    });
     if (sectionRef.current) observer.observe(sectionRef.current);
     return () => observer.disconnect();
   }, []);
@@ -48,7 +51,7 @@ const Contact = ({ lang }) => {
       }`}
     >
       <div className="absolute inset-0 bg-gradient-to-tr from-blue-50 via-transparent to-purple-50 dark:from-blue-950/20 dark:to-purple-950/20"></div>
-      
+
       <div className="container mx-auto px-6 max-w-6xl relative z-10">
         <div className="text-center mb-12">
           <div className="inline-flex items-center gap-2 px-4 py-1 rounded-full bg-gradient-to-r from-purple-500/10 to-emerald-500/10 border border-purple-500/20 mb-4">
@@ -72,7 +75,7 @@ const Contact = ({ lang }) => {
                   <MapPin className="w-6 h-6 text-white" />
                 </div>
                 <span className="text-gray-700 dark:text-gray-300 font-medium">
-                  {lang === 'ar' ? 'القصيم، المملكة العربية السعودية' : 'Al-Qassim, Saudi Arabia'}
+                  <span>{lang === 'ar' ? 'الفيوم - المحمدية' : 'Fayoum - El Mohamadeya'}</span>
                 </span>
               </div>
             </div>
@@ -82,19 +85,48 @@ const Contact = ({ lang }) => {
                 <div className="w-12 h-12 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 flex items-center justify-center">
                   <MessageCircle className="w-6 h-6 text-white" />
                 </div>
-                <a href={`https://wa.me/${whatsappNumber}`} target="_blank" rel="noopener noreferrer" className="text-gray-700 dark:text-gray-300 hover:text-emerald-500 transition-colors" dir="ltr">
-                  +966 50 675 1303
+                <a
+                  href={`https://wa.me/${whatsappNumber}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-700 dark:text-gray-300 hover:text-emerald-500 transition-colors"
+                  dir="ltr"
+                >
+                  +20 106 248 5133{' '}
+                </a>
+              </div>
+            </div>
+
+            <div className="group p-6 rounded-2xl bg-white/40 dark:bg-slate-800/40 backdrop-blur-sm border border-white/20 hover:border-purple-500/50 transition-all duration-500 hover:-translate-x-2">
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-r from-purple-500 to-pink-500 flex items-center justify-center">
+                  <Instagram className="w-6 h-6 text-white" />
+                </div>
+                <a
+                  href={`https://wa.me/${whatsappNumber}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-700 dark:text-gray-300 hover:text-purple-500 transition-colors break-all"
+                  dir="ltr"
+                >
+                  {instagramHandle}
                 </a>
               </div>
             </div>
 
             {emails.map((email, index) => (
-              <div key={index} className="group p-6 rounded-2xl bg-white/40 dark:bg-slate-800/40 backdrop-blur-sm border border-white/20 hover:border-purple-500/50 transition-all duration-500 hover:-translate-x-2">
+              <div
+                key={index}
+                className="group p-6 rounded-2xl bg-white/40 dark:bg-slate-800/40 backdrop-blur-sm border border-white/20 hover:border-purple-500/50 transition-all duration-500 hover:-translate-x-2"
+              >
                 <div className="flex items-center gap-4">
                   <div className="w-12 h-12 rounded-xl bg-gradient-to-r from-purple-500 to-pink-500 flex items-center justify-center">
                     <Mail className="w-6 h-6 text-white" />
                   </div>
-                  <a href={`mailto:${email}`} className="text-gray-700 dark:text-gray-300 hover:text-purple-500 transition-colors break-all">
+                  <a
+                    href={`mailto:${email}`}
+                    className="text-gray-700 dark:text-gray-300 hover:text-purple-500 transition-colors break-all"
+                  >
                     {email}
                   </a>
                 </div>
@@ -157,7 +189,13 @@ const Contact = ({ lang }) => {
                 className="w-full py-3 rounded-xl bg-gradient-to-r from-purple-600 to-emerald-600 text-white font-semibold hover:shadow-lg hover:shadow-purple-500/30 transition-all duration-300 transform hover:-translate-y-0.5 disabled:opacity-70 flex items-center justify-center gap-2"
               >
                 <Send size={18} />
-                {loading ? (lang === 'ar' ? 'جار الإرسال...' : 'Sending...') : (lang === 'ar' ? 'إرسال' : 'Send')}
+                {loading
+                  ? lang === 'ar'
+                    ? 'جار الإرسال...'
+                    : 'Sending...'
+                  : lang === 'ar'
+                    ? 'إرسال'
+                    : 'Send'}
               </button>
             </form>
           </div>

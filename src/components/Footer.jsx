@@ -1,11 +1,13 @@
-import { Mail, MessageCircle, MapPin } from 'lucide-react';
+import { Mail, MessageCircle, MapPin, Instagram } from 'lucide-react';
 import bg from '../Assets/footer.jpeg';
 import logo from '../Assets/logo.png';
 
 const Footer = ({ lang = 'ar' }) => {
-  const whatsappNumber = '966506751303';
-  const emails = ['genralpedwi@gmail.com', 'sdwr2000@gmail.com'];
-  const taxNumber = '312864606400003';
+  const whatsappNumber = '201062485133';
+  const emails = ['support@Aruqah.com'];
+  const phoneNumber = '+20 106 248 5133';
+  const instagramHandle = '@Aruqah_official';
+  const taxNumber = '312864606484703';
 
   const quickLinks = {
     ar: [
@@ -30,8 +32,8 @@ const Footer = ({ lang = 'ar' }) => {
   };
 
   return (
-    <footer 
-      className="relative bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white" 
+    <footer
+      className="relative bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white"
       dir={lang === 'ar' ? 'rtl' : 'ltr'}
     >
       <div
@@ -53,7 +55,9 @@ const Footer = ({ lang = 'ar' }) => {
               {lang === 'ar' ? 'أروقة' : 'Aruqah'}
             </h3>
             <p className="text-gray-400 text-sm mt-4 leading-relaxed">
-              {lang === 'ar' ? 'بناء المستقبل بجودة وإتقان' : 'Building the future with quality and precision'}
+              {lang === 'ar'
+                ? 'بناء المستقبل بجودة وإتقان'
+                : 'Building the future with quality and precision'}
             </p>
           </div>
 
@@ -65,8 +69,8 @@ const Footer = ({ lang = 'ar' }) => {
             <ul className="space-y-2">
               {quickLinks[lang].map((link) => (
                 <li key={link.label}>
-                  <button 
-                    onClick={() => handleScroll(link.href)} 
+                  <button
+                    onClick={() => handleScroll(link.href)}
                     className="text-gray-400 hover:text-purple-400 transition-colors text-sm"
                   >
                     {link.label}
@@ -84,30 +88,50 @@ const Footer = ({ lang = 'ar' }) => {
             <div className="space-y-3">
               <div className="flex items-center gap-3 text-sm text-gray-400">
                 <MapPin className="w-4 h-4 text-purple-400" />
-                <span>{lang === 'ar' ? 'القصيم، السعودية' : 'Al-Qassim, Saudi Arabia'}</span>
+                <span>{lang === 'ar' ? 'الفيوم - المحمدية' : 'Fayoum - El Mohamadeya'}</span>
               </div>
               <div className="flex items-center gap-3 text-sm">
                 <MessageCircle className="w-4 h-4 text-emerald-400" />
-                <a 
-                  href={`https://wa.me/${whatsappNumber}`} 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
+                <a
+                  href={`https://wa.me/${whatsappNumber}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="text-gray-400 hover:text-emerald-400 transition-colors"
                 >
-                  +966 50 675 1303
+                  {lang === 'ar' ? (
+                    <>
+                      واتساب :
+                      <span dir="ltr" className="ms-1">
+                        {phoneNumber}
+                      </span>
+                    </>
+                  ) : (
+                    `WhatsApp: ${phoneNumber}`
+                  )}{' '}
                 </a>
               </div>
               {emails.map((email) => (
                 <div key={email} className="flex items-center gap-3 text-sm">
                   <Mail className="w-4 h-4 text-purple-400" />
-                  <a 
-                    href={`mailto:${email}`} 
+                  <a
+                    href={`mailto:${email}`}
                     className="text-gray-400 hover:text-purple-400 transition-colors break-all"
                   >
                     {email}
                   </a>
                 </div>
               ))}
+              <div className="flex items-center gap-3 text-base mb-3">
+                <Instagram className="w-4 h-4 text-purple-400" />
+                <a
+                  href="https://instagram.com/BreatyWomen"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-400 hover:text-purple-400 transition-colors break-all"
+                >
+                  {instagramHandle}
+                </a>
+              </div>
             </div>
           </div>
 
@@ -127,7 +151,8 @@ const Footer = ({ lang = 'ar' }) => {
 
         {/* Copyright */}
         <div className="mt-10 pt-6 border-t border-purple-500/20 text-center text-gray-500 text-sm">
-          © 2026 {lang === 'ar' ? 'أروقة' : 'Aruqah'}. {lang === 'ar' ? 'جميع الحقوق محفوظة' : 'All rights reserved.'}
+          © 2026 {lang === 'ar' ? 'أروقة' : 'Aruqah'}.{' '}
+          {lang === 'ar' ? 'جميع الحقوق محفوظة' : 'All rights reserved.'}
         </div>
       </div>
     </footer>

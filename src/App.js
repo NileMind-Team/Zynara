@@ -10,20 +10,20 @@ function App() {
 
   useEffect(() => {
     if (lang === 'ar') {
-      document.title = 'Zynara - حلول عقارية مبتكرة';
+      document.title = 'ZINARA MEDIA - تصميم وبرمجة مواقع احترافية';
       document
         .querySelector('meta[name="description"]')
         ?.setAttribute(
           'content',
-          'Zynara - بيع، شراء وتأجير العقارات في السعودية مع حلول مبتكرة وموثوقة تناسب احتياجاتك العقارية.'
+          'ZINARA MEDIA - شركة متخصصة في تصميم وبرمجة المواقع والجرافيك ديزين، نقدم حلولاً رقمية مبتكرة لعملائنا في مصر والوطن العربي.'
         );
     } else {
-      document.title = 'Zynara - Innovative Real Estate Solutions';
+      document.title = 'ZINARA MEDIA - Professional Web Design & Development';
       document
         .querySelector('meta[name="description"]')
         ?.setAttribute(
           'content',
-          'Zynara - Buy, sell, and rent properties in Saudi Arabia with innovative and trusted real estate solutions tailored to your needs.'
+          'ZINARA MEDIA - Professional web design and development company, specializing in modern websites and graphic design solutions.'
         );
     }
   }, [lang]);
@@ -38,13 +38,13 @@ function App() {
     return (
       <div
         className={`fixed inset-0 flex items-center justify-center z-50 ${
-          darkMode ? 'bg-slate-900' : 'bg-slate-50'
+          darkMode ? 'bg-[#1A1A1A]' : 'bg-[#1A1A1A]'
         }`}
       >
         <div className="relative">
-          <div className="w-16 h-16 border-4 border-emerald-500/30 border-t-emerald-500 rounded-full animate-spin"></div>
+          <div className="w-16 h-16 border-4 border-[#00FF99]/30 border-t-[#00FF99] rounded-full animate-spin"></div>
           <div
-            className="absolute inset-0 w-16 h-16 border-4 border-transparent border-r-purple-500 rounded-full animate-spin"
+            className="absolute inset-0 w-16 h-16 border-4 border-transparent border-r-[#00AEEF] rounded-full animate-spin"
             style={{ animationDuration: '0.8s' }}
           ></div>
         </div>
@@ -53,7 +53,7 @@ function App() {
   }
 
   return (
-    <div className="flex flex-col min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-100 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 transition-colors duration-500">
+    <div className="flex flex-col min-h-screen bg-white dark:bg-[#1A1A1A] transition-colors duration-500">
       <Navbar lang={lang} setLang={setLang} darkMode={darkMode} setDarkMode={setDarkMode} />
       <Home lang={lang} />
       <Footer lang={lang} />

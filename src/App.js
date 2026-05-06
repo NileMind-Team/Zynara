@@ -38,7 +38,7 @@ function App() {
     return (
       <div
         className={`fixed inset-0 flex items-center justify-center z-50 ${
-          darkMode ? 'bg-[#1A1A1A]' : 'bg-[#1A1A1A]'
+          darkMode ? 'bg-[#1A1A1A]' : 'bg-white'
         }`}
       >
         <div className="relative">

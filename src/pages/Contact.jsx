@@ -9,8 +9,8 @@ const Contact = ({ lang }) => {
   const sectionRef = useRef(null);
 
   const whatsappNumber = '201062485133';
-  const emails = ['support@Aruqah.com'];
-  const instagramHandle = '@Aruqah_official';
+  const emails = ['support@Zynara.com'];
+  const instagramHandle = '@Zynara_official';
   const taxNumber = '312864606484703';
 
   useEffect(() => {

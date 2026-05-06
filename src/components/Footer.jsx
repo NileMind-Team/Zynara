@@ -4,9 +4,9 @@ import logo from '../Assets/logo.png';
 
 const Footer = ({ lang = 'ar' }) => {
   const whatsappNumber = '201062485133';
-  const emails = ['support@Aruqah.com'];
+  const emails = ['support@Zynara.com'];
   const phoneNumber = '+20 106 248 5133';
-  const instagramHandle = '@Aruqah_official';
+  const instagramHandle = '@Zynara_official';
   const taxNumber = '312864606484703';
 
   const quickLinks = {
@@ -52,7 +52,7 @@ const Footer = ({ lang = 'ar' }) => {
           <div className="md:col-span-1">
             <img src={logo} alt="Logo" className="w-28 mb-4" />
             <h3 className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-emerald-400 bg-clip-text text-transparent">
-              {lang === 'ar' ? 'أروقة' : 'Aruqah'}
+              {lang === 'ar' ? 'Zynara' : 'Zynara'}
             </h3>
             <p className="text-gray-400 text-sm mt-4 leading-relaxed">
               {lang === 'ar'
@@ -151,7 +151,7 @@ const Footer = ({ lang = 'ar' }) => {
 
         {/* Copyright */}
         <div className="mt-10 pt-6 border-t border-purple-500/20 text-center text-gray-500 text-sm">
-          © 2026 {lang === 'ar' ? 'أروقة' : 'Aruqah'}.{' '}
+          © 2026 {lang === 'ar' ? 'Zynara' : 'Zynara'}.{' '}
           {lang === 'ar' ? 'جميع الحقوق محفوظة' : 'All rights reserved.'}
         </div>
       </div>

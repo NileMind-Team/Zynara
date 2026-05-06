@@ -10,20 +10,20 @@ function App() {
 
   useEffect(() => {
     if (lang === 'ar') {
-      document.title = 'أروقة - حلول عقارية مبتكرة';
+      document.title = 'Zynara - حلول عقارية مبتكرة';
       document
         .querySelector('meta[name="description"]')
         ?.setAttribute(
           'content',
-          'أروقة - بيع، شراء وتأجير العقارات في السعودية مع حلول مبتكرة وموثوقة تناسب احتياجاتك العقارية.'
+          'Zynara - بيع، شراء وتأجير العقارات في السعودية مع حلول مبتكرة وموثوقة تناسب احتياجاتك العقارية.'
         );
     } else {
-      document.title = 'Aruqah - Innovative Real Estate Solutions';
+      document.title = 'Zynara - Innovative Real Estate Solutions';
       document
         .querySelector('meta[name="description"]')
         ?.setAttribute(
           'content',
-          'Aruqah - Buy, sell, and rent properties in Saudi Arabia with innovative and trusted real estate solutions tailored to your needs.'
+          'Zynara - Buy, sell, and rent properties in Saudi Arabia with innovative and trusted real estate solutions tailored to your needs.'
         );
     }
   }, [lang]);
@@ -43,7 +43,10 @@ function App() {
       >
         <div className="relative">
           <div className="w-16 h-16 border-4 border-emerald-500/30 border-t-emerald-500 rounded-full animate-spin"></div>
-          <div className="absolute inset-0 w-16 h-16 border-4 border-transparent border-r-purple-500 rounded-full animate-spin" style={{ animationDuration: '0.8s' }}></div>
+          <div
+            className="absolute inset-0 w-16 h-16 border-4 border-transparent border-r-purple-500 rounded-full animate-spin"
+            style={{ animationDuration: '0.8s' }}
+          ></div>
         </div>
       </div>
     );

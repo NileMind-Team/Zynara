@@ -11,7 +11,7 @@ const About = ({ lang }) => {
       title: 'Who We Are',
       subtitle: 'Redefining Construction Excellence',
       description:
-        'Aruqah delivers cutting-edge, reliable, and innovative projects across residential, commercial, and industrial sectors, including:',
+        'Zynara delivers cutting-edge, reliable, and innovative projects across residential, commercial, and industrial sectors, including:',
       services: [
         'Modern designs and advanced engineering plans for finishing works',
         'Smart electrical, plumbing, and marble foundation systems',
@@ -22,12 +22,14 @@ const About = ({ lang }) => {
         {
           title: 'Mission',
           icon: <Target className="w-4 h-4" />,
-          content: 'To revolutionize construction through innovation, sustainability, and unwavering quality.',
+          content:
+            'To revolutionize construction through innovation, sustainability, and unwavering quality.',
         },
         {
           title: 'Vision',
           icon: <Building2 className="w-4 h-4" />,
-          content: 'To become the most trusted name in modern infrastructure and smart construction.',
+          content:
+            'To become the most trusted name in modern infrastructure and smart construction.',
         },
         {
           title: 'Values',
@@ -35,13 +37,18 @@ const About = ({ lang }) => {
           content: 'Innovation, integrity, collaboration, and excellence drive everything we do.',
         },
       ],
-      why: ['Cutting-Edge Technology', 'Zero-Delay Delivery', 'Transparent Pricing', 'Custom Solutions'],
+      why: [
+        'Cutting-Edge Technology',
+        'Zero-Delay Delivery',
+        'Transparent Pricing',
+        'Custom Solutions',
+      ],
     },
     ar: {
       title: 'من نحن',
       subtitle: 'نعيد تعريف التميز في البناء',
       description:
-        'تقدم أروقة مشاريع مبتكرة وموثوقة في القطاعات السكنية والتجارية والصناعية، وتشمل:',
+        'تقدم Zynara مشاريع مبتكرة وموثوقة في القطاعات السكنية والتجارية والصناعية، وتشمل:',
       services: [
         'تصميمات عصرية وخطط هندسية متقدمة للتشطيبات',
         'أنظمة تأسيس ذكية للكهرباء والسباكة والرخام',
@@ -72,7 +79,9 @@ const About = ({ lang }) => {
   const current = content[lang] || content.en;
 
   useEffect(() => {
-    const observer = new IntersectionObserver(([entry]) => setVisible(entry.isIntersecting), { threshold: 0.1 });
+    const observer = new IntersectionObserver(([entry]) => setVisible(entry.isIntersecting), {
+      threshold: 0.1,
+    });
     if (sectionRef.current) observer.observe(sectionRef.current);
     return () => observer.disconnect();
   }, []);
@@ -94,7 +103,9 @@ const About = ({ lang }) => {
         <div className="text-center mb-12">
           <div className="inline-flex items-center gap-2 px-4 py-1 rounded-full bg-gradient-to-r from-purple-500/10 to-emerald-500/10 border border-purple-500/20 mb-4">
             <Sparkles className="w-4 h-4 text-purple-500" />
-            <span className="text-sm font-medium text-purple-600 dark:text-purple-400">{current.subtitle}</span>
+            <span className="text-sm font-medium text-purple-600 dark:text-purple-400">
+              {current.subtitle}
+            </span>
           </div>
           <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-emerald-600 bg-clip-text text-transparent mb-4">
             {current.title}

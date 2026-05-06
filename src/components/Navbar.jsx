@@ -52,12 +52,19 @@ const Navbar = ({ lang, setLang, darkMode, setDarkMode }) => {
       className={`fixed w-full top-0 left-0 z-50 transition-all duration-500 ${scrolled ? 'bg-[#1A1A1A]/95 backdrop-blur-md shadow-lg border-b border-[#00AEEF]/20' : 'bg-[#1A1A1A]/80 backdrop-blur-sm'}`}
     >
       <div className="container mx-auto px-4 py-2 flex items-center justify-between">
-        <div className="cursor-pointer" onClick={() => handleScroll('home')}>
+        {/* Logo and Company Name */}
+        <div
+          className="flex items-center gap-3 cursor-pointer"
+          onClick={() => handleScroll('home')}
+        >
           <img
             src={darkMode ? logoDark : logoLight}
             alt="Logo"
             className="w-12 h-14 object-contain"
           />
+          <span className="text-white font-bold text-xl tracking-wide bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+            ZINARA MEDIA
+          </span>
         </div>
 
         <nav className="hidden md:flex items-center gap-6">
@@ -100,6 +107,15 @@ const Navbar = ({ lang, setLang, darkMode, setDarkMode }) => {
       {/* Mobile Menu */}
       {menuOpen && (
         <div className="md:hidden fixed inset-0 top-14 bg-[#1A1A1A] z-40 p-5 flex flex-col">
+          {/* Mobile Logo and Name */}
+          <div className="flex items-center gap-3 mb-4 pb-4 border-b border-gray-800">
+            <img
+              src={darkMode ? logoDark : logoLight}
+              alt="Logo"
+              className="w-10 h-12 object-contain"
+            />
+            <span className="text-white font-bold text-lg tracking-wide">ZINARA MEDIA</span>
+          </div>
           {navLinks[lang].map((link) => (
             <button
               key={link.id}

@@ -107,7 +107,7 @@ const Services = ({ lang }) => {
             <Sparkles className="w-4 h-4 text-[#00AEEF]" />
             <span className="text-sm font-medium text-[#00AEEF]">{current.subtitle}</span>
           </div>
-          <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-[#00AEEF] via-[#003366] to-[#00FF99] bg-clip-text text-transparent">
+          <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-[#00AEEF] via-[#4A90E2] to-[#00FF99] bg-clip-text text-transparent">
             {current.title}
           </h2>
           <div className="w-24 h-1 bg-gradient-to-r from-[#00AEEF] to-[#00FF99] mx-auto mt-4 rounded-full"></div>

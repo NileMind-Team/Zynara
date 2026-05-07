@@ -8,7 +8,7 @@ const Contact = ({ lang }) => {
   const [visible, setVisible] = useState(false);
   const sectionRef = useRef(null);
 
-  const whatsappNumber = '01152093245';
+  const whatsappNumber = '201152093245';
   const emails = ['zynaramedia09@gmail.com'];
   const instagramHandle = '@zynara_media';
   const facebookHandle = 'ZynaraMedia';
@@ -76,7 +76,7 @@ const Contact = ({ lang }) => {
               {lang === 'ar' ? 'تواصل مع فريقنا' : 'Get In Touch'}
             </span>
           </div>
-          <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-[#00AEEF] via-[#003366] to-[#00FF99] bg-clip-text text-transparent">
+          <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-[#00AEEF] via-[#4A90E2] to-[#00FF99] bg-clip-text text-transparent">
             {lang === 'ar' ? 'تواصل معنا' : 'Contact Us'}
           </h2>
           <div className="w-24 h-1 bg-gradient-to-r from-[#00AEEF] to-[#00FF99] mx-auto mt-4 rounded-full"></div>

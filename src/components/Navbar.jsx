@@ -49,7 +49,9 @@ const Navbar = ({ lang, setLang, darkMode, setDarkMode }) => {
 
   return (
     <header
-      className={`fixed w-full top-0 left-0 z-50 transition-all duration-500 ${scrolled ? 'bg-[#1A1A1A]/95 backdrop-blur-md shadow-lg border-b border-[#00AEEF]/20' : 'bg-[#1A1A1A]/80 backdrop-blur-sm'}`}
+      className={`fixed w-full top-0 left-0 z-50 transition-all duration-500 ${
+        scrolled ? 'bg-[#1A1A1A] shadow-lg border-b border-[#00AEEF]/20' : 'bg-[#1A1A1A]'
+      }`}
     >
       <div className="container mx-auto px-4 py-2 flex items-center justify-between">
         {/* Logo and Company Name */}
@@ -104,45 +106,52 @@ const Navbar = ({ lang, setLang, darkMode, setDarkMode }) => {
         </button>
       </div>
 
-      {/* Mobile Menu */}
+      {/* Mobile Menu - فقط الخلفية على المحتوى */}
       {menuOpen && (
-        <div className="md:hidden fixed inset-0 top-14 bg-[#1A1A1A] z-40 p-5 flex flex-col">
-          {/* Mobile Logo and Name */}
-          <div className="flex items-center gap-3 mb-4 pb-4 border-b border-gray-800">
-            <img
-              src={darkMode ? logoDark : logoLight}
-              alt="Logo"
-              className="w-10 h-12 object-contain"
-            />
-            <span className="text-white font-bold text-lg tracking-wide">ZINARA MEDIA</span>
+        <>
+          {/* Overlay شفاف يغطي الصفحة ويقفل السكرول */}
+          <div className="fixed inset-0 bg-black/20 backdrop-blur-sm z-40" onClick={toggleMenu} />
+
+          {/* محتوى المنيو - خلفية فقط على المحتوى نفسه */}
+          <div className="fixed top-16 right-0 left-0 z-50">
+            <div className="container mx-auto px-4">
+              <div className="bg-[#1A1A1A] rounded-2xl shadow-2xl border border-gray-800 overflow-hidden mx-2">
+                {navLinks[lang].map((link) => (
+                  <button
+                    key={link.id}
+                    onClick={() => handleScroll(link.id)}
+                    className="w-full py-4 px-6 text-gray-300 hover:text-[#00FF99] hover:bg-gray-800/50 text-base font-medium border-b border-gray-800 last:border-b-0 transition-colors text-left"
+                  >
+                    {link.label}
+                  </button>
+                ))}
+                <div className="flex gap-3 p-4 bg-gray-900/50">
+                  <button
+                    onClick={() => setDarkMode(!darkMode)}
+                    className="flex-1 py-2 rounded-xl bg-gray-800 flex items-center justify-center gap-2 text-sm text-white hover:bg-gray-700 transition"
+                  >
+                    {darkMode ? <Sun size={16} /> : <Moon size={16} />}
+                    <span>
+                      {darkMode
+                        ? lang === 'en'
+                          ? 'Light'
+                          : 'فاتح'
+                        : lang === 'en'
+                          ? 'Dark'
+                          : 'داكن'}
+                    </span>
+                  </button>
+                  <button
+                    onClick={toggleLang}
+                    className="flex-1 py-2 rounded-xl bg-gradient-to-r from-[#00AEEF] to-[#003366] text-white flex items-center justify-center gap-2 text-sm hover:shadow-lg transition"
+                  >
+                    <Globe size={16} /> {lang === 'en' ? 'AR' : 'EN'}
+                  </button>
+                </div>
+              </div>
+            </div>
           </div>
-          {navLinks[lang].map((link) => (
-            <button
-              key={link.id}
-              onClick={() => handleScroll(link.id)}
-              className="py-3 text-gray-300 hover:text-[#00FF99] text-base font-medium border-b border-gray-800"
-            >
-              {link.label}
-            </button>
-          ))}
-          <div className="flex gap-3 mt-5 pt-5 border-t border-gray-800">
-            <button
-              onClick={() => setDarkMode(!darkMode)}
-              className="flex-1 py-2 rounded-xl bg-gray-800 flex items-center justify-center gap-2 text-sm text-white"
-            >
-              {darkMode ? <Sun size={16} /> : <Moon size={16} />}
-              <span>
-                {darkMode ? (lang === 'en' ? 'Light' : 'فاتح') : lang === 'en' ? 'Dark' : 'داكن'}
-              </span>
-            </button>
-            <button
-              onClick={toggleLang}
-              className="flex-1 py-2 rounded-xl bg-gradient-to-r from-[#00AEEF] to-[#003366] text-white flex items-center justify-center gap-2 text-sm"
-            >
-              <Globe size={16} /> {lang === 'en' ? 'AR' : 'EN'}
-            </button>
-          </div>
-        </div>
+        </>
       )}
     </header>
   );

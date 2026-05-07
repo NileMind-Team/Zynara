@@ -3,7 +3,7 @@ import bg from '../Assets/footer.jpg';
 import logo from '../Assets/logo.png';
 
 const Footer = ({ lang = 'ar' }) => {
-  const whatsappNumber = '01152093245';
+  const whatsappNumber = '201152093245';
   const emails = ['zynaramedia09@gmail.com'];
   const phoneNumber = '+20 115 209 3245';
   const instagramHandle = '@zynara_media';

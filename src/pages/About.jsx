@@ -102,7 +102,7 @@ const About = ({ lang }) => {
             <Sparkles className="w-4 h-4 text-[#00AEEF]" />
             <span className="text-sm font-medium text-[#00AEEF]">{current.subtitle}</span>
           </div>
-          <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-[#00AEEF] via-[#003366] to-[#00FF99] bg-clip-text text-transparent mb-4">
+          <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-[#00AEEF] via-[#4A90E2] to-[#00FF99] bg-clip-text text-transparent mb-4">
             {current.title}
           </h2>
           <div className="w-24 h-1 bg-gradient-to-r from-[#00AEEF] to-[#00FF99] mx-auto rounded-full"></div>
@@ -152,7 +152,7 @@ const About = ({ lang }) => {
         </div>
 
         <div className="mt-8">
-          <h3 className="text-2xl font-bold text-center bg-gradient-to-r from-[#00AEEF] to-[#003366] bg-clip-text text-transparent mb-8">
+          <h3 className="text-2xl font-bold text-center bg-gradient-to-r from-[#00AEEF] to-[#00FF99] bg-clip-text text-transparent mb-8 dark:text-white">
             {lang === 'ar' ? 'لماذا تختار ZINARA MEDIA؟' : 'Why Choose ZINARA MEDIA?'}
           </h3>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
